@@ -9,35 +9,43 @@ var cheerio = require("cheerio");
 var db = require("./models");
 
 var PORT = process.env.PORT || 3000;
+
+// If deployed, use the deployed database.  Otherwise, use the local database:
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/unit18Populater";
 
 // Initialize Express
 var app = express();
 
-// Configure middleware
+
+//========== CONFIGURE MIDDLEWARE ===========//
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
+
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Make public a static folder
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-// Routes
 
-// A GET route for scraping the echoJS website
+//========== ROUTES ===========//
+
+// A GET route for scraping the Business Insider website:
 app.get("/scrape", function(req, res) {
-  // First, we grab the body of the html with axios
-  axios.get("http://www.echojs.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+
+  // Make a request via axios for BI's "TECH" board. 
+  axios.get("https://www.businessinsider.com/sai").then(function(response) {
+
+    // Then, load the response into cheerio and save it to a variable ('$' for a shorthand cheerio's selector):
     var $ = cheerio.load(response.data);
 
-    // Now, we grab every h2 within an article tag, and do the following:
-    $("article h2").each(function(i, element) {
+    // Grab every 'a.title' within an article tag, and do the following:
+    $(a.class="title").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
@@ -62,7 +70,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Send a message to the client
-    res.send("Scrape Complete");
+    res.send("Scrape Complete!");
   });
 });
 
