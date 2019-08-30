@@ -11,7 +11,7 @@ var db = require("./models");
 var PORT = process.env.PORT || 3000;
 
 // If deployed, use the deployed database.  Otherwise, use the local database:
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://<dbuser>:<dbpassword>@ds311968.mlab.com:11968/heroku_n09d73q8";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://akira108:adom1n@ds311968.mlab.com:11968/heroku_n09d73q8";
 
 // Initialize Express
 var app = express();
@@ -39,23 +39,26 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 app.get("/scrape", function(req, res) {
 
   // Make a request via axios for BI's "TECH" board. 
-  axios.get("https://www.businessinsider.com/sai").then(function(response) {
+  axios.get("https://www.nytimes.com/section/arts").then(function(response) {
 
     // Then, load the response into cheerio and save it to a variable ('$' for a shorthand cheerio's selector):
     var $ = cheerio.load(response.data);
 
     // Grab every 'a.title' within an article tag, and do the following:
-    $("article title").each(function(i, element) {
+    $("div .story-link").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
-        .children("a")
+        .children("div").children("h2")
         .text();
+
       result.link = $(this)
-        .children("a")
+        // .children("a")
         .attr("href");
+
+      console.log(result);
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
