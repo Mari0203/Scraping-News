@@ -1,8 +1,4 @@
-body {
-  background-color: rgb(196, 196, 196);
-}
-
-.carousel-content img {
+.carousel-inner img {
     width: 100%;
     height: 100%;
     opacity: .8;
@@ -10,7 +6,6 @@ body {
 
 .carousel-caption {
     position: absolute;
-    top: 50%;
     transform: 1px 1px 15p white;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
