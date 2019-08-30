@@ -21,6 +21,9 @@ var routes = require("./routes/routes.js");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+// Use routes
+app.use(routes);
+
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 

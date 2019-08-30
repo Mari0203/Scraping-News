@@ -1,9 +1,14 @@
-//========== ROUTES ===========//
+// Packages
+var axios = require("axios");
+var cheerio = require("cheerio");
+
+// ========== ROUTES ===========//
 var db = require("../models");
 var app = require("express").Router();
 
 // A GET route for scraping the Business Insider website:
 app.get("/scrape", function(req, res) {
+console.log("Scraping: " + res);
 
     // Make a request via axios for BI's "TECH" board. 
     axios.get("https://www.nytimes.com/section/arts").then(function(response) {
