@@ -11,7 +11,7 @@ var db = require("./models");
 var PORT = process.env.PORT || 3000;
 
 // If deployed, use the deployed database.  Otherwise, use the local database:
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/unit18Populater";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://<dbuser>:<dbpassword>@ds311968.mlab.com:11968/heroku_n09d73q8";
 
 // Initialize Express
 var app = express();
@@ -45,7 +45,7 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(response.data);
 
     // Grab every 'a.title' within an article tag, and do the following:
-    $(a.class="title").each(function(i, element) {
+    $("article title").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
@@ -70,7 +70,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Send a message to the client
-    res.send("Scrape Complete!");
+    res.send("** Scrape Complete! **");
   });
 });
 

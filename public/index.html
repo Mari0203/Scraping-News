@@ -8,16 +8,13 @@
   <!-- Bootstrap CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-  <!-- For use of Social Media icons -->
-  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-
   <!-- Style CSS link -->
-  <link href="reset.css" rel="reset.css">
+  <!-- <link href="reset.css" rel="reset.css"> -->
   <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <!-- Header image slider -->
     <div id="slides" class="carousel slide" data-ride="carousel">
       <ul class="carousel-indicators">
@@ -27,7 +24,7 @@
       </ul>
       <div class="carousel-content">
         <div class="carousel-item active">
-          <img src="./images/digitalBrain_background.jpeg" alt="background_1">
+          <img src="./images/blue_globe_background.jpg" alt="background_1">
           <div class="carousel-caption">
             <h1 class="display-2">TOP TECH NEWS SCRAPPER</h1>
             <h3>Business Insider Edition</h3>
@@ -36,7 +33,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img src="./images/GE_background.jpg" alt="background_2">
+          <img src="./images/digitalBrain_background.jpeg" alt="background_2">
         </div>
         <div class="carousel-item">
           <img src="./images/blue_globe_background.jpg" alt="background_3">
@@ -49,12 +46,27 @@
       <h1 class="text-center lead" style="font-family: 'Cute Font', cursive; font-size: 2rem;">Chugga chugga
         Business Insider | TECH Edition</h1>
     </div> -->
-
     <hr>
     <div class="row">
-      <div id="articles"></div>
-      <div id="notes"></div>
+      <div class="card mb-12">
+        <div class="card-header bg-secondary text-white">Top Tech News</div>
+        <div class="card-body">
+          <div id="articles"></div>
+          <button type="submit" class="btn btn-primary" id="submit-button">Done</button>
+        </div>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="card mb-12">
+        <div class="card-header bg-secondary text-white">Notes</div>
+        <div class="card-body">
+          <div id="notes"></div>
+          <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- jQuery, javascript file for the Bootstrap's javascript file to function -->
