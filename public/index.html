@@ -18,11 +18,25 @@
 
 <body>
   <div class="container">
-    <div class="jumbotron">
+    <!-- Header image slider -->
+    <div id="slides" class="carousel slide" data-ride="carousel">
+      <ul class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+      </ul>
+      <div class="carousel-content">
+        <div class="carousel-item active">
+          <img src="" alt="background image">
+        </div>
+      </div>
+    </div>
+    <!-- <div class="jumbotron">
       <h1 class="text-center display-4">TOP NEWS SCRAPPER</h1>
       <h1 class="text-center lead" style="font-family: 'Cute Font', cursive; font-size: 2rem;">Chugga chugga
         Business Insider | TECH Edition</h1>
-    </div>
+    </div> -->
+
     <hr>
     <div class="row">
       <div id="articles"></div>
