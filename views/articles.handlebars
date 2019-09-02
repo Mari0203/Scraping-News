@@ -1,0 +1,32 @@
+<style media="screen">
+  li {
+    background-color: rgb(179, 213, 242)
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 50%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+</style>
+
+<h1>Saved Articles</h1>
+<div class="container">
+  {{#unless articles.length}}
+    <div class="row">
+    
+    {{#each articles}}
+      <div class="card">
+        <div class="card-header bg-secondary text-white">{{this.title}}</div>
+          <div class="card-body">{{this.link}}
+          <form>
+            <div class="form-group">
+            <label for="=notesText">Enter your notes here...</label>
+            <textarea class="form-control" id="notesText"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-button">Submit Notes</button>
+          </form>
+        </div>
+      </div>
+    {{/each}}
+    </div>
+  {{/unless}}
+</div>

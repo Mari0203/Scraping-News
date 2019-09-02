@@ -7,19 +7,20 @@ var db = require("../models");
 var app = require("express").Router();
 
 // A GET route for scraping the Business Insider website:
-app.get("/scrape", function(req, res) {
-console.log("Scraping: " + res);
+app.get("/", function(req, res) {
+console.log("SCRAPING RESULTS: " + res);
 
     // Make a request via axios for BI's "TECH" board. 
     axios.get("https://www.nytimes.com/section/arts").then(function(response) {
   
       // Then, load the response into cheerio and save it to a variable ('$' for a shorthand cheerio's selector):
       var $ = cheerio.load(response.data);
-  
+      var result = {};
+
       // Grab every 'a.title' within an article tag, and do the following:
       $("div .story-link").each(function(i, element) {
         // Save an empty result object
-        var result = {};
+        // var result = {};
   
         // Add the text and href of every link, and save them as properties of the result object
         result.title = $(this)
@@ -27,7 +28,7 @@ console.log("Scraping: " + res);
           .text();
   
         result.link = $(this)
-          // .children("a")
+          // .children("a") 
           .attr("href");
   
         console.log(result);
@@ -45,7 +46,8 @@ console.log("Scraping: " + res);
       });
   
       // Send a message to the client
-      res.send("** Scrape Complete! **");
+      // res.send("** Scrape Complete! **");
+      res.render("index", { articles: result });
     });
   });
   
@@ -71,7 +73,7 @@ console.log("Scraping: " + res);
       .populate("note")
       .then(function(dbArticle) {
         // If we were able to successfully find an Article with the given id, send it back to the client
-        res.json(dbArticle);
+        res.render("index", { articles: dbArticles });
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
@@ -90,13 +92,19 @@ console.log("Scraping: " + res);
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
       })
       .then(function(dbArticle) {
+
         // If we were able to successfully update an Article, send it back to the client
-        res.json(dbArticle);
+        // res.json(dbArticle);
+
+        // Render "index.handlebars" articles
+        res.render("index", { articles: dbArticles });
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
         res.json(err);
       });
+
+
   });
 
   module.exports = app

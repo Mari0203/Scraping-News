@@ -7,7 +7,7 @@
 .carousel-caption {
     position: absolute;
     transform: 1px 1px 15p white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .carousel-caption h1 {

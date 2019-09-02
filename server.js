@@ -2,8 +2,6 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var axios = require("axios");
-var cheerio = require("cheerio");
 var exphbs = require("express-handlebars");
 
 var PORT = process.env.PORT || 3000;
@@ -15,8 +13,8 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://akira108:adom1n@ds311968
 var app = express();
 var routes = require("./routes/routes.js");
 
-//========== CONFIGURE MIDDLEWARE ===========//
 
+// ================== CONFIGURE MIDDLEWARE =====================//
 // Set Handlebars as the default templating engine.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
