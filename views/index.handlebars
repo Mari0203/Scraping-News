@@ -1,7 +1,10 @@
 <div class="container">
-
+<a href="/scrape" class="btn btn-primary">scrape</a>
+ 
+ <a href="/saved" class="btn btn-primary">saved article</a>
+<a href="/clear" id="clear" class="btn btn-primary">clear article</a>
   <!-- Header image slider -->
-  <div id="slides" class="carousel slide" data-ride="carousel">
+  {{!-- <div id="slides" class="carousel slide" data-ride="carousel">
     <ul class="carousel-indicators">
       <li data-target="#slides" data-slide-to="0" class="active"></li>
       <li data-target="#slides" data-slide-to="1"></li>
@@ -32,18 +35,22 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
-  {{#unless articles.length}}
+  </div> --}}
+
+  {{#if articles.length}}
     <div class="row">
     
     {{#each articles}}
+      {{!-- {{this.title}}={{this.link}} --}}
+      <br>
       <div class="card">
-        <div class="card-header bg-secondary text-white">{{this.title}}</div>
-          <div class="card-body">{{this.link}}
-          <button type="button" class="btn btn-primary" id="save-button">Save</button>
+        <div class="card-header bg-secondary text-white"> <a href="{{this.link}}" style="color:white">{{this.title}}</a> </div>
+          <div class="card-body">
+            {{this.summary}}
+          <button type="button" data-id="{{this._id}}" class="btn btn-primary" id="save-button">Save</button>
         </div>
       </div>
     {{/each}}
     </div>
-  {{/unless}}
+  {{/if}}
 </div>

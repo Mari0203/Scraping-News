@@ -10,23 +10,24 @@
 
 <h1>Saved Articles</h1>
 <div class="container">
-  {{#unless articles.length}}
+  {{#if articles.length}}
     <div class="row">
     
     {{#each articles}}
       <div class="card">
-        <div class="card-header bg-secondary text-white">{{this.title}}</div>
-          <div class="card-body">{{this.link}}
+        <div class="card-header bg-secondary text-white"><a href="{{this.link}}" style="color:white">{{this.title}}</a></div>
+          <div class="card-body">{{this.summary}}
+            <hr>
           <form>
             <div class="form-group">
             <label for="=notesText">Enter your notes here...</label>
             <textarea class="form-control" id="notesText"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" id="submit-button">Submit Notes</button>
+            <button type="submit" class="btn btn-primary" id="submit-button">Save Notes</button>
           </form>
         </div>
       </div>
     {{/each}}
     </div>
-  {{/unless}}
+  {{/if}}
 </div>
