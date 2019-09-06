@@ -31,6 +31,7 @@ app.use(express.json());
 
 // Make public a static folder
 app.use(express.static("public"));
+// app.use(express.static(__dirname + '/public'));
 
 // Connect to the Mongo DB
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });

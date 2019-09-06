@@ -1,12 +1,12 @@
 <div class="container-fluid">
-  <a href="/scrape" class="btn btn-primary">scrape</a>
+  {{!-- <a href="/scrape" class="btn btn-primary">scrape</a>
 
   <a href="/saved" class="btn btn-primary">saved article</a>
-  <a href="/clear" id="clear" class="btn btn-primary">clear article</a>
+  <a href="/clear" id="clear" class="btn btn-primary">clear article</a> --}}
 
   {{!-- Navbar --}}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">NEWS SCRAPPER</a>
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">News Scraper</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -18,33 +18,38 @@
       </div>
     </div>
     <form class="form-inline">
-      <button class="btn btn-outline-success" type="button" id="scrape" <a href="/scrape"></a>>Scrape</button>
-      <button class="btn btn-outline-danger" type="button" id="clear" <a href="/clear"></a>Clear All</button>
+      <a href="/scrape" id="scrape" class="btn btn-success btn-sm">SCRAPE</a>
+      <a href="/clear" id="clear" class="btn btn-danger btn-sm">CLEAR ARTICLES</a>
     </form>
   </nav>
 
   {{!-- Jumbotron / Title --}}
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4 text-center">News Scraper</h1>
+      <h1 class="display-4 text-center">News Scraper with Mongoose</h1>
       <p class="lead text-center">New York Times | Arts</p>
     </div>
   </div>
 
   {{!-- Cards / Article Results --}}
   {{#if articles.length}}
-  <div class="row">
-
-    {{#each articles}}
-    <br>
-    <div class="card">
-      <div class="card-header bg-info text-white"> <a href="{{this.link}}" style="color:white">{{this.title}}</a>
-      </div>
-      <div class="card-body">{{this.summary}}
-        <button type="button" data-id="{{this._id}}" class="btn btn-warning" id="save-button">SAVE ARTICLE</button>
-      </div>
+  {{#each articles}}
+  <br>
+  <div class="card card-fluid">
+    <div class="card-header bg-info text-white">
+      <a href="{{this.link}}" style="color:white">{{this.title}}</a>
+      <button type="button" data-id="{{this._id}}" class="btn btn-outline-warning btn-sm"
+        id="save-button">SAVE ARTICLE</button>
     </div>
-    {{/each}}
+    <div class="card-body">{{this.summary}}</div>
   </div>
+  {{/each}}
   {{/if}}
+
+  {{!-- Footer --}}
+  <br>
+  <footer class="container-fluid bg-dark">
+    <div class="text-center text-white" id="footer">copyright &copy; 2019 by Mari</p>
+  </footer>
+
 </div>
