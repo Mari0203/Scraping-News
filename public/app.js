@@ -100,7 +100,6 @@ $(document).on("click", "#save-button", function() {
 // When you click the savenote button
 $(document).on("click", "#clear", function() {
  
-
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "DELETE",
