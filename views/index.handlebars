@@ -1,55 +1,49 @@
-<div class="container-fluid">
-  {{!-- <a href="/scrape" class="btn btn-primary">scrape</a>
-
-  <a href="/saved" class="btn btn-primary">saved article</a>
-  <a href="/clear" id="clear" class="btn btn-primary">clear article</a> --}}
-
-  {{!-- Navbar --}}
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">News Scraper</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="/saved">Saved Articles</a>
-      </div>
-    </div>
-    <form class="form-inline">
-      <a href="/scrape" id="scrape" class="btn btn-success btn-sm">SCRAPE</a>
-      <a href="/clear" id="clear" class="btn btn-danger btn-sm">CLEAR ARTICLES</a>
-    </form>
-  </nav>
-
-  {{!-- Jumbotron / Title --}}
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4 text-center">News Scraper with Mongoose</h1>
-      <p class="lead text-center">New York Times | Arts</p>
+{{!-- Navbar with buttons --}}
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">News Scraper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/saved">Saved Articles</a>
     </div>
   </div>
+  <form class="form-inline">
+    <a href="/scrape" id="scrape" class="btn btn-success btn-sm">SCRAPE</a>
+    <a href="/clear" id="clear" class="btn btn-danger btn-sm">CLEAR ARTICLES</a>
+  </form>
+</nav>
 
-  {{!-- Cards / Article Results --}}
-  {{#if articles.length}}
-  {{#each articles}}
-  <br>
-  <div class="card card-fluid">
-    <div class="card-header bg-info text-white">
-      <a href="{{this.link}}" style="color:white">{{this.title}}</a>
-      <button type="button" data-id="{{this._id}}" class="btn btn-outline-warning btn-sm"
-        id="save-button">SAVE ARTICLE</button>
-    </div>
-    <div class="card-body">{{this.summary}}</div>
+{{!-- Jumbotron / Title --}}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">News Scraper with Mongoose</h1>
+    <p class="lead text-center">New York Times | Arts</p>
   </div>
-  {{/each}}
-  {{/if}}
-
-  {{!-- Footer --}}
-  <br>
-  <footer class="container-fluid bg-dark">
-    <div class="text-center text-white" id="footer">copyright &copy; 2019 by Mari</p>
-  </footer>
-
 </div>
+
+{{!-- Cards / Article Results --}}
+<div class="container-fluid" style="background-image: url(" ../images/grey_wood_background.jpg")">
+  {{#if articles.length}} 
+    {{#each articles}} 
+      <div class="card card-fluid">
+        <div class="card-header bg-info text-white">
+          <a href="{{this.link}}" style="color:white">{{this.title}}</a>
+          <button type="button" data-id="{{this._id}}" class="btn btn-warning btn-sm" id="save-button">SAVE ARTICLE</button>
+        </div>  
+        <div class="card-body">
+          {{this.summary}}
+        </div>
+      </div>
+      <br>
+    {{/each}}
+  {{/if}}
+</div>
+
+{{!-- Footer --}}
+<footer class="container-fluid bg-dark">
+  <div class="text-center text-white" id="footer">copyright &copy; 2019 by Mari</p>
+</footer>

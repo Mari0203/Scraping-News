@@ -6,19 +6,19 @@ var cheerio = require("cheerio");
 var db = require("../models");
 var app = require("express").Router();
 
-app.get("/",function(req,res){
-       // Grab every document in the Articles collection
-       db.Article.find({})
-       .then(function(dbArticles) {
-         // If we were able to successfully find Articles, send them back to the client
-         res.render("index",{articles: dbArticles});
-       })
-       .catch(function(err) {
-         // If an error occurred, send it to the client
-         res.json(err);
-       });
-             
-})
+app.get("/", function(req, res) {
+  // Grab every document in the Articles collection
+  db.Article.find({})
+    .then(function(dbArticles) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.render("index", { articles: dbArticles });
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
 // A GET route for scraping the Business Insider website and re-routes it back to the root/home page:
 app.get("/scrape", function(req, res) {
   console.log("SCRAPING RESULTS: " + res);
@@ -40,10 +40,9 @@ app.get("/scrape", function(req, res) {
         .children("h2")
         .text();
 
-      result.link = $(this)
-        .attr("href");
+      result.link = $(this).attr("href");
 
-        result.summary = $(this)
+      result.summary = $(this)
         .children("div")
         .children("p.summary")
         .text();
@@ -53,7 +52,6 @@ app.get("/scrape", function(req, res) {
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function(dbArticle) {
-                 
           console.log("=========== ");
           // View the added result in the console
           console.log(dbArticle);
@@ -65,7 +63,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Redirects back to home (root) page after scraping is done:
-    res.redirect("/")
+    res.redirect("/");
     console.log(result);
   });
 });
@@ -84,10 +82,8 @@ app.get("/articles", function(req, res) {
     });
 });
 
-
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
-
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
@@ -102,12 +98,13 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
-/*
 // Route for getting an article by id# from the database
-app.put("/articles/:id", function(req,res){
-  db.Article.update({_id: req.params.id}, { saved:true}).then(function(results){
-  res.send(results)
-});
+app.put("/articles/:id", function(req, res) {
+  db.Article.update({ _id: req.params.id }, { saved: true }).then(function(
+    results
+  ) {
+    res.send(results);
+  });
 });
 
 // Route for saving/updating an Article's associated Note
@@ -133,20 +130,18 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
-*/
 
 // Route for grabbing SAVED articles:
 app.get("/saved", function(req, res) {
-  db.Article.find({saved: true})
-  .then(function(dbArticle) {
-    res.render("articles", {articles: dbArticle});
+  db.Article.find({ saved: true }).then(function(dbArticle) {
+    res.render("articles", { articles: dbArticle });
   });
 });
 
 // Routes for clearing/deleting ALL scraped articles:
 app.delete("/clear", function(req, res) {
-  db.Article.drop() 
-  
+  db.Article.drop();
+
   // Routes back to the root/home page after clearing articles:
   res.redirect("/");
 });
@@ -159,8 +154,7 @@ app.get("/clearall", function(req, res) {
     if (error) {
       console.log(error);
       res.send(error);
-    }
-    else {
+    } else {
       // Otherwise, send the mongojs response to the browser
       // This will fire off the success function of the ajax request
       console.log(response);

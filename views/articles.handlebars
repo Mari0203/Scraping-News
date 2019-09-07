@@ -1,23 +1,45 @@
-<style media="screen">
-  li {
-    background-color: rgb(179, 213, 242)
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 50%;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  }
-</style>
+{{!-- Navbar --}}
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">News Scraper</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/">Home</a>
+        <a class="nav-item nav-link" href="/saved">Saved Articles<span class="sr-only">(current)</span></a>
+      </div>
+    </div>
+    <form class="form-inline">
+      {{!-- <a href="/scrape" id="scrape" class="btn btn-success btn-sm">SCRAPE</a> --}}
+      <a href="/clear" id="clear" class="btn btn-danger btn-sm">CLEAR ARTICLES</a>
+    </form>
+  </nav>
 
-<h1>Saved Articles</h1>
-<div class="container">
+<h1 class="text-center">Saved Articles</h1>
   {{#if articles.length}}
+  {{#each articles}}
+  <div class="card card-fluid">
+    <div class="card-header bg-light">
+      <a href="{{this.link}}">{{this.title}}</a>
+      <button type="submit" data-id="{{this._id}}" class="btn btn-danger btn-sm"
+        id="submit-button">Add Notes</button>
+    </div>
+    <div class="card-body">{{this.summary}}</div>
+  </div>
+  <br>
+  {{/each}}
+  {{/if}}
+  {{!-- {{#if articles.length}}
     <div class="row">
     
     {{#each articles}}
       <div class="card">
-        <div class="card-header bg-secondary text-white"><a href="{{this.link}}" style="color:white">{{this.title}}</a></div>
+        <div class="card-header bg-secondary text-white">
+          <a href="{{this.link}}" style="color:white">{{this.title}}</a></div>
           <div class="card-body">{{this.summary}}
-            <hr>
+            
           <form>
             <div class="form-group">
             <label for="=notesText">Enter your notes here...</label>
@@ -29,5 +51,10 @@
       </div>
     {{/each}}
     </div>
-  {{/if}}
+  {{/if}} --}}
+
+  {{!-- Footer --}}
+  <footer class="container-fluid bg-dark">
+    <div class="text-center text-white" id="footer">copyright &copy; 2019 by Mari</p>
+  </footer>
 </div>

@@ -1,14 +1,31 @@
+.body {
+  background-image: url("../images/grey_wood_background.jpg");
+}
+
 .jumbotron {
   background-image: url("../images/book_pages.jpg");
   background-size: cover;
 }
 
 #footer {
-  font-size: .75rem;
+  font-size: .85rem;
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
 .card-body {
   font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+#save-button {
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  /* bottom: 75%; */
+}
+
+#scrape {
+  position: relative;
+  right: 15px;
 }
