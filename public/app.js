@@ -1,4 +1,4 @@
-// Grab the articles as a json
+// Grab the articles as a JSON and display at http://localhost:3000/articles
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
@@ -7,7 +7,7 @@ $.getJSON("/articles", function(data) {
   }
 });
 
-
+/*
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
   // Empty the notes from the note section
@@ -15,7 +15,8 @@ $(document).on("click", "p", function() {
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
 
-  // Now make an ajax call for the Article
+
+  // Ajax call for the Article
   $.ajax({
     method: "GET",
     url: "/articles/" + thisId
@@ -41,9 +42,41 @@ $(document).on("click", "p", function() {
       }
     });
 });
+*/
 
-// When you click the savenote button
-$(document).on("click", "#savenote", function() {
+// "SAVE ARTICLE" button: When clicked, grab the associated id with the article from the submit button.
+$(document).on("click", "#save-article-btn", function() {
+  var thisId = $(this).attr("data-id");
+
+  // Run a POST request to
+  $.ajax({
+    method: "PUT",
+    url: "/articles/" + thisId,
+    data: { }
+  }).then(function(data) {
+      console.log(data);
+    });
+
+  // Also, remove the values entered in the input and textarea for note entry
+  $("#titleinput").val("");
+  $("#bodyinput").val("");
+});
+
+
+// "CLEAR ARTICLES" button: When clicked, delete all scraped articles.
+$(document).on("click", "#clear", function() {
+ 
+  // Run a DELETE request:
+  $.ajax({
+    method: "DELETE",
+    url: "/clearArticles"   
+  }).then(function(data) {
+      console.log(data);
+    });
+});
+
+// "SAVES NOTES" button: When clicked, grab user input and POST to MongoDB.
+$(document).on("click", "#save-notes-btn", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
@@ -57,61 +90,12 @@ $(document).on("click", "#savenote", function() {
       // Value taken from note textarea
       body: $("#bodyinput").val()
     }
-  })
-    // With that done
-    .then(function(data) {
-      // Log the response
+  }).then(function(data) {
       console.log(data);
-      // Empty the notes section
-      $("#notes").empty();
+       $("#notes").empty();
     });
 
   // Also, remove the values entered in the input and textarea for note entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
-});
-
-
-// When you click the savenote button
-$(document).on("click", "#save-button", function() {
-  // Grab the id associated with the article from the submit button
-  var thisId = $(this).attr("data-id");
-
-  // Run a POST request to change the note, using what's entered in the inputs
-  $.ajax({
-    method: "PUT",
-    url: "/articles/" + thisId,
-    data: { }
-  })
-    // With that done
-    .then(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-    //  $("#notes").empty();
-    });
-
-  // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
-});
-
-
-// When you click the savenote button
-$(document).on("click", "#clear", function() {
- 
-  // Run a POST request to change the note, using what's entered in the inputs
-  $.ajax({
-    method: "DELETE",
-    url: "/clear"   
-  })
-    // With that done
-    .then(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-    //  $("#notes").empty();
-    });
-
- 
 });

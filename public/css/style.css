@@ -1,6 +1,6 @@
-.body {
+/* .body {
   background-image: url("../images/grey_wood_background.jpg");
-}
+} */
 
 .jumbotron {
   background-image: url("../images/book_pages.jpg");
@@ -18,14 +18,26 @@
 
 }
 
-#save-button {
+#scrape {
+  position: relative;
+  right: 15px;
+}
+
+#save-article-btn {
   position: absolute;
   right: 20px;
   top: 8px;
   /* bottom: 75%; */
 }
 
-#scrape {
-  position: relative;
-  right: 15px;
+#add-notes-btn {
+  position: absolute;
+  right: 20px;
+  top: 8px;
+}
+
+#delete-btn {
+  position: absolute;
+  right: 120px;
+  top: 8px;
 }

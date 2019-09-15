@@ -13,7 +13,7 @@
   </div>
   <form class="form-inline">
     <a href="/scrape" id="scrape" class="btn btn-success btn-sm">SCRAPE</a>
-    <a href="/clear" id="clear" class="btn btn-danger btn-sm">CLEAR ARTICLES</a>
+    <a href="/clear" id="clear" class="btn btn-danger btn-sm">CLEAR ALL ARTICLES</a>
   </form>
 </nav>
 
@@ -25,14 +25,14 @@
   </div>
 </div>
 
-{{!-- Cards / Article Results --}}
+{{!-- Cards for Scraped Article Results --}}
 <div class="container-fluid" style="background-image: url(" ../images/grey_wood_background.jpg")">
   {{#if articles.length}} 
     {{#each articles}} 
       <div class="card card-fluid">
         <div class="card-header bg-info text-white">
           <a href="{{this.link}}" style="color:white">{{this.title}}</a>
-          <button type="button" data-id="{{this._id}}" class="btn btn-warning btn-sm" id="save-button">SAVE ARTICLE</button>
+          <button type="button" data-id="{{this._id}}" class="btn btn-warning btn-sm" id="save-article-btn">SAVE ARTICLE</button>
         </div>  
         <div class="card-body">
           {{this.summary}}

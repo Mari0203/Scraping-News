@@ -1,60 +1,77 @@
 {{!-- Navbar --}}
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">News Scraper</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="/">Home</a>
-        <a class="nav-item nav-link" href="/saved">Saved Articles<span class="sr-only">(current)</span></a>
-      </div>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">News Scraper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home</a>
+      <a class="nav-item nav-link" href="/saved">Saved Articles<span class="sr-only">(current)</span></a>
     </div>
-    <form class="form-inline">
-      {{!-- <a href="/scrape" id="scrape" class="btn btn-success btn-sm">SCRAPE</a> --}}
-      <a href="/clear" id="clear" class="btn btn-danger btn-sm">CLEAR ARTICLES</a>
-    </form>
-  </nav>
+  </div>
+</nav>
 
-<h1 class="text-center">Saved Articles</h1>
+{{!-- Cards to show Saved Articles --}}
+<div class="container-fluid" style="background-image: url(" ../images/grey_wood_background.jpg")"> <br>
+  <h1 class="text-center">Your Saved Articles</h1>
+  <br>
   {{#if articles.length}}
   {{#each articles}}
   <div class="card card-fluid">
     <div class="card-header bg-light">
       <a href="{{this.link}}">{{this.title}}</a>
-      <button type="submit" data-id="{{this._id}}" class="btn btn-danger btn-sm"
-        id="submit-button">Add Notes</button>
+
+      {{!-- Button to delete specific article by id --}}
+      <button data-id="{{this._id}}" class="btn btn-danger btn-sm" id="delete-btn">Delete Article</button>
     </div>
-    <div class="card-body">{{this.summary}}</div>
+    <div class="container">
+      <div class="card-body">{{this.summary}}</div>
+
+      {{!-- Button to trigger modal --}}
+      <button type="button" data-id="{{this._id}}" class="btn btn-primary btn-sm" id="add-notes-btn" data-toggle="modal"
+        data-target="#notesModal">Add Notes
+      </button>
+
+      {{!-- Modal prompt to enter Notes --}}
+      <div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="notesModalLabel">YOUR NOTES FOR THE ARTICLE</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-warning btn-sm" data-id="{{this._id}}" id="save-notes-btn">Save
+                Notes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{!-- <div class="form-group">
+    <label for="notesArea"></label>
+    <textarea class="form-control" id="textBox" rows="3"></textarea>
+    <br>
+    <button type="submit" data-id="{{this._id}}" class="btn btn-warning btn-sm"
+        id="save-notes-btn">Save Notes</button>
+    </div> --}}
+    </div>
   </div>
   <br>
   {{/each}}
   {{/if}}
-  {{!-- {{#if articles.length}}
-    <div class="row">
-    
-    {{#each articles}}
-      <div class="card">
-        <div class="card-header bg-secondary text-white">
-          <a href="{{this.link}}" style="color:white">{{this.title}}</a></div>
-          <div class="card-body">{{this.summary}}
-            
-          <form>
-            <div class="form-group">
-            <label for="=notesText">Enter your notes here...</label>
-            <textarea class="form-control" id="notesText"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" id="submit-button">Save Notes</button>
-          </form>
-        </div>
-      </div>
-    {{/each}}
-    </div>
-  {{/if}} --}}
+</div>
 
-  {{!-- Footer --}}
-  <footer class="container-fluid bg-dark">
-    <div class="text-center text-white" id="footer">copyright &copy; 2019 by Mari</p>
-  </footer>
+{{!-- Footer --}}
+<footer class="container-fluid bg-dark">
+  <div class="text-center text-white" id="footer">copyright &copy; 2019 by Mari</p>
+</footer>
 </div>

@@ -132,6 +132,8 @@ app.post("/articles/:id", function(req, res) {
 });
 
 // Route for grabbing SAVED articles:
+/* If the 1st word of http packet is get, AND if the 2nd word is /saved,
+ then the callback function (i.e. Defining the endpoint) */
 app.get("/saved", function(req, res) {
   db.Article.find({ saved: true }).then(function(dbArticle) {
     res.render("articles", { articles: dbArticle });
@@ -139,11 +141,17 @@ app.get("/saved", function(req, res) {
 });
 
 // Routes for clearing/deleting ALL scraped articles:
-app.delete("/clear", function(req, res) {
-  db.Article.drop();
+app.delete("/clearArticles", function(req, res) {
+  
+  console.log("CLEARING ROUTES -- '/clearArticles' route worked!");
 
+   db.Article.remove({});
+
+   res.json({ msg: "here"})
+  // res.redirect("/");
+  
   // Routes back to the root/home page after clearing articles:
-  res.redirect("/");
+  
 });
 
 // Clear the DB
