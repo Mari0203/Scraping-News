@@ -142,26 +142,26 @@ app.get("/saved", function(req, res) {
 
 // Routes for clearing/deleting ALL scraped articles:
 app.delete("/clearArticles", function(req, res) {
-  
   console.log("CLEARING ROUTES -- '/clearArticles' route worked!");
 
-   db.Article.remove({});
+  //  db.Article.remove({});
+  db.Article.deleteMany({},  (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    // Routes back to the root/home page after clearing articles:
+    res.redirect("/");
+  });
 
-   res.json({ msg: "here"})
-  // res.redirect("/");
-  
-  // Routes back to the root/home page after clearing articles:
-  
-});
-
-// Clear the DB
-app.get("/clearall", function(req, res) {
+})
+// Routes for deleting saved notes...
+app.get("/deleteNotes", function(req, res) {
   // Remove every note from the notes collection
-  db.notes.remove({}, function(error, response) {
+  db.notes.remove({}, function(err, response) {
     // Log any errors to the console
-    if (error) {
-      console.log(error);
-      res.send(error);
+    if (err) {
+      console.log(err);
+      res.send(err);
     } else {
       // Otherwise, send the mongojs response to the browser
       // This will fire off the success function of the ajax request
