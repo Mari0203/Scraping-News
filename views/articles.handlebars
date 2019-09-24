@@ -46,12 +46,14 @@
               </button>
             </div>
             <div class="modal-body">
-              <textarea id="noteText" col=50 row=10></textarea>
+              <textarea id="noteText"></textarea>
+              <div id="noteInput">Your notes input goes here...</div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-warning btn-sm" data-id="{{this._id}}" id="save-notes-btn">Save
+              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success btn-sm" data-id="{{this._id}}" id="save-notes-btn">Save
                 Notes</button>
+              <button type="submit" class="btn btn-danger btn-sm" data-id="{{this._id}}" id="delete-notes-btn">Delete Notes</button>
             </div>
           </div>
         </div>

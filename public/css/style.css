@@ -41,3 +41,14 @@
   right: 120px;
   top: 8px;
 }
+
+#noteText {
+  border: 1px solid blue;
+  width: 50%;
+}
+
+#noteInput {
+  float: right;
+  border: 1px solid red;
+  width: 45%;
+}

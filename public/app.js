@@ -48,7 +48,9 @@ $(document).on("click", "#add-notes-btn", function() {
 $(document).on("click", "#save-notes-btn", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
-
+  console.log("thisId: ", thisId);
+  console.log("in main.handlebars this: ", this);
+  
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
@@ -60,7 +62,7 @@ $(document).on("click", "#save-notes-btn", function() {
       body: $("#bodyinput").val()
     }
   }).then(function(data) {
-      console.log(data);
+      console.log("Data returned from AJAX: ", data);
        $("#notes").empty();
     });
 
