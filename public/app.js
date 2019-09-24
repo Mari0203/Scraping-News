@@ -45,21 +45,28 @@ $(document).on("click", "#add-notes-btn", function() {
 });
 
 // "SAVES NOTES" button: When clicked, grab user input and POST to MongoDB.
-$(document).on("click", "#save-notes-btn", function() {
+$(document).on("click", "#save-notes-btn", function(event) {
+  event.preventDefault();
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
+  // var testVar = {
+  //   // Value taken from objectId
+  //   articleID: thisId,
+  //   // Value taken from notes written in the <textarea>
+  //   text: $("#noteText").val()
+  // };
+
   console.log("thisId: ", thisId);
-  console.log("in main.handlebars this: ", this);
+  console.log("noteText:", $("#noteText").val());
   
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
     url: "/articles/" + thisId,
     data: {
-      // Value taken from title input
-      title: $("#titleinput").val(),
-      // Value taken from note textarea
-      body: $("#bodyinput").val()
+      articleID: thisId,
+      // Value taken from notes written in the <textarea>
+      text: $("#noteText").val()
     }
   }).then(function(data) {
       console.log("Data returned from AJAX: ", data);
@@ -67,6 +74,5 @@ $(document).on("click", "#save-notes-btn", function() {
     });
 
   // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
+  $("#noteText").val("");
 });

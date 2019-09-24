@@ -6,8 +6,8 @@ var Schema = mongoose.Schema;
 // Using the Schema constructor, create a new NoteSchema object
 // This is similar to a Sequelize model
 var NoteSchema = new Schema({
-  text: String,
-  articleID: Number
+  articleID: Schema.Types.ObjectId,
+  text: String
 });
 
 // This creates our model from the above schema, using mongoose's model method

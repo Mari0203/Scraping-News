@@ -19,14 +19,17 @@ var routes = require("./routes/routes.js");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+app.use(express.urlencoded({ extended: true }));
+
 // Use routes
-app.use(routes);                                  ;
+app.use(routes);         
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 
 // Set up to parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
+
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Make public a static folder
