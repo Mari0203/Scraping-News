@@ -40,31 +40,24 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="notesModalLabel">Notes for: {{this.title}}</h5>
+              <h5 class="modal-title" id="notesModalLabel">Your Notes For: {{title}}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <textarea id="noteText"></textarea>
-              <div id="noteInput">Your notes input goes here...</div>
+              <textarea id="noteText"> </textarea>
+              <div id="noteInput"> </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success btn-sm" data-id="{{this._id}}" id="save-notes-btn">Save
+              <button type="submit" class="btn btn-success btn-sm" data-id="{{_id}}" id="save-notes-btn">Save
                 Notes</button>
-              <button type="submit" class="btn btn-danger btn-sm" data-id="{{this._id}}" id="delete-notes-btn">Delete Notes</button>
+              <button type="submit" class="btn btn-danger btn-sm" data-id="{{_id}}" id="delete-notes-btn">Delete Notes</button>
             </div>
           </div>
         </div>
       </div>
-      {{!-- <div class="form-group">
-    <label for="notesArea"></label>
-    <textarea class="form-control" id="textBox" rows="3"></textarea>
-    <br>
-    <button type="submit" data-id="{{this._id}}" class="btn btn-warning btn-sm"
-        id="save-notes-btn">Save Notes</button>
-    </div> --}}
     </div>
   </div>
   <br>

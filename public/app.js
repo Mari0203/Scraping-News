@@ -29,6 +29,7 @@ $(document).on("click", "#save-article-btn", function() {
 // "CLEAR ARTICLES" button: When clicked, delete all scraped articles.
 $(document).on("click", "#clear", function(event) {
   event.preventDefault();
+
   // Run a DELETE request:
   $.ajax({
     method: "DELETE",
@@ -39,9 +40,19 @@ $(document).on("click", "#clear", function(event) {
     location.reload();
 });
 
-// "Add NOTES" button:
+// "ADD NOTES" button:
 $(document).on("click", "#add-notes-btn", function() {
-  $("#notesModal").modal("show");
+
+ 
+  $.getJSON("/articles/"+ $("#add-notes-btn").attr("data-id"), function(notesDetail) {
+    console.log(notesDetail.note )
+    $("#noteInput").empty()
+    for(var i=0; i < notesDetail.note.length; i++)
+        $("#noteInput").append(notesDetail.note[i].body +"<br>")
+    $("#notesModal").modal("show");
+  });
+
+
 });
 
 // "SAVES NOTES" button: When clicked, grab user input and POST to MongoDB.
@@ -49,12 +60,6 @@ $(document).on("click", "#save-notes-btn", function(event) {
   event.preventDefault();
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
-  // var testVar = {
-  //   // Value taken from objectId
-  //   articleID: thisId,
-  //   // Value taken from notes written in the <textarea>
-  //   text: $("#noteText").val()
-  // };
 
   console.log("thisId: ", thisId);
   console.log("noteText:", $("#noteText").val());
@@ -66,7 +71,7 @@ $(document).on("click", "#save-notes-btn", function(event) {
     data: {
       articleID: thisId,
       // Value taken from notes written in the <textarea>
-      text: $("#noteText").val()
+      body: $("#noteText").val()
     }
   }).then(function(data) {
       console.log("Data returned from AJAX: ", data);
@@ -75,4 +80,18 @@ $(document).on("click", "#save-notes-btn", function(event) {
 
   // Also, remove the values entered in the input and textarea for note entry
   $("#noteText").val("");
+});
+
+// "DELETE NOTES" button:
+$(document).on("click", "#delete-notes-btn", function(event) {
+  event.preventDefault();
+
+// Run a DELETE request
+$.ajax({
+  method: "DELETE",
+  url: "/deleteNotes"
+}).then(function(data) {
+  console.log(data);
+  });
+  location.reload();
 });

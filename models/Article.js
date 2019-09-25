@@ -23,7 +23,7 @@ var ArticleSchema = new Schema({
   },
   note: [{
     type: Schema.Types.ObjectId,
-    ref: "Note"
+    ref: "note"
   }]
   // `note` is an object that stores a Note id
   // The ref property links the ObjectId to the Note model

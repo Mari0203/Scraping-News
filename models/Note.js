@@ -7,11 +7,14 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var NoteSchema = new Schema({
   articleID: Schema.Types.ObjectId,
-  text: String
+ body:{
+    type:String
+   
+ } 
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Note = mongoose.model("Note", NoteSchema);
+var Note = mongoose.model("note", NoteSchema);
 
 // Export the Note model
 module.exports = Note;
