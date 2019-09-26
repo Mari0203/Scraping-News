@@ -92,8 +92,6 @@ app.put("/articles/:id", function(req, res) {
 });
 
 // Route for grabbing SAVED articles:
-/* If the 1st word of http packet is get, AND if the 2nd word is /saved,
- then the callback function (i.e. Defining the endpoint) */
 app.get("/saved", function(req, res) {
   db.Article.find({ saved: true }).then(function(dbArticle) {
     res.render("articles", { articles: dbArticle });
@@ -152,19 +150,18 @@ app.get("/articles/:id", function(req, res) {
     .populate("note")
     .then(function(notesDetail) {
 
-      console.log("notesDetail:"+notesDetail)
+      console.log("notesDetail:"+ notesDetail)
       // res.json(notesDetail)
       // If we were able to successfully find an Article with the given id, send it back to the client
      / res.json( notesDetail );
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
 
 // Route for DELETING one article by id
-app.delete("/articles/:id", function(req, res) {
+app.delete("/saved/:id", function(req, res) {
   db.Article.deleteOne({ _id: req.params.id },  (err, data) => {
     if (err) {
       console.log(err);

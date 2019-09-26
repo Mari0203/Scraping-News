@@ -62,13 +62,13 @@ $(document).on("click", "#clear", function(event) {
 });
 
 // "DELETE ARTICLE" button: When clicked, it deletes specified article from Saved Article page.
-$(document).on("click", "#delete-btn", function() {
+$(document).on("click", "#delete-article-btn", function() {
   var thisId = $(this).attr("data-id");
 
   // Run a POST request to
   $.ajax({
     method: "DELETE",
-    url: "/articles/" + thisId,
+    url: "/articles/deleteArticle/" + thisId,
     data: {}
   }).then(function(data) {
     console.log(data);
