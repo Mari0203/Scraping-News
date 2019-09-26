@@ -64,14 +64,13 @@ $(document).on("click", "#clear", function(event) {
 // "DELETE ARTICLE" button: When clicked, it deletes specified article from Saved Article page.
 $(document).on("click", "#delete-article-btn", function() {
   var thisId = $(this).attr("data-id");
-
   // Run a POST request to
   $.ajax({
     method: "DELETE",
     url: "/deleteArticle/" + thisId,
     data: {}
   }).then(function(data) {
-    console.log(data);
+  location.reload();
   });
 });
 
@@ -117,6 +116,7 @@ $(document).on("click", "#delete-notes-btn", function(event) {
     method: "DELETE",
     url: "/deleteNotes"
   }).then(function(data) {
+    location.reload();
     console.log(data);
   });
   refresh();

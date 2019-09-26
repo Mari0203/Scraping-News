@@ -166,8 +166,7 @@ app.delete("/deleteArticle/:id", function(req, res) {
     if (err) {
       console.log(err);
     }
-    // Routes back to the Saved Article page after deleting specified article:
-    res.redirect("/saved");
+    res.json(data);
   });
 });
 
