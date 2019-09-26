@@ -161,7 +161,7 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // Route for DELETING one article by id
-app.delete("/saved/:id", function(req, res) {
+app.delete("/deleteArticle/:id", function(req, res) {
   db.Article.deleteOne({ _id: req.params.id },  (err, data) => {
     if (err) {
       console.log(err);

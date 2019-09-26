@@ -68,7 +68,7 @@ $(document).on("click", "#delete-article-btn", function() {
   // Run a POST request to
   $.ajax({
     method: "DELETE",
-    url: "/articles/deleteArticle/" + thisId,
+    url: "/deleteArticle/" + thisId,
     data: {}
   }).then(function(data) {
     console.log(data);
