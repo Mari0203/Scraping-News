@@ -41,15 +41,27 @@
   top: 8px;
 }
 
-#noteText {
-  border: 1px solid blue;
+.noteTextInputWrapper {
+  float: left;
+  font-weight: bold;
   width: 50%;
 }
 
-#noteInput {
+#noteTextInput {
+  border: 1px solid blue;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+
+.noteOutputWrapper {
   float: right;
-  border: 1px dotted red;
+  font-weight: bold;
   width: 45%;
+}
+
+#noteOutput {
+  border: 1px dotted red;
   min-height: 200px; 
   padding: 5px 10px;
 }

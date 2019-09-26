@@ -68,7 +68,7 @@ app.get("/scrape", function(req, res) {
   });
 });
 
-// Route for getting ALL Articles from the database
+// Route for getting ALL Articles from MongoDB database
 app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
   db.Article.find({})
@@ -161,6 +161,17 @@ app.get("/articles/:id", function(req, res) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+// Route for DELETING one article by id
+app.delete("/articles/:id", function(req, res) {
+  db.Article.deleteOne({ _id: req.params.id },  (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    // Routes back to the Saved Article page after deleting specified article:
+    res.redirect("/saved");
+  });
 });
 
 // Routes for DELETING saved notes

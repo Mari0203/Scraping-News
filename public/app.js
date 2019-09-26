@@ -3,7 +3,15 @@ $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    $("#articles").append(
+      "<p data-id='" +
+        data[i]._id +
+        "'>" +
+        data[i].title +
+        "<br />" +
+        data[i].link +
+        "</p>"
+    );
   }
 });
 
@@ -15,26 +23,29 @@ $(document).on("click", "#save-article-btn", function() {
   $.ajax({
     method: "PUT",
     url: "/articles/" + thisId,
-    data: { }
+    data: {}
   }).then(function(data) {
-      console.log(data);
-    });
+    console.log(data);
+  });
 
   // Also, remove the values entered in the input and textarea for note entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
 
-function refresh(){
+// Refresh function
+function refresh() {
   // alert("Saved!")
-  $.getJSON("/articles/"+ $("#add-notes-btn").attr("data-id"), function(notesDetail) {
-    console.log(notesDetail.note )
-    $("#noteInput").empty()
-    for(var i=0; i < notesDetail.note.length; i++)
-        $("#noteInput").append(notesDetail.note[i].body +"<br>")
+  $.getJSON("/articles/" + $("#add-notes-btn").attr("data-id"), function(
+    notesDetail
+  ) {
+    console.log(notesDetail.note);
+    $("#noteOutput").empty();
+    for (var i = 0; i < notesDetail.note.length; i++)
+      $("#noteOutput").append(notesDetail.note[i].body + "<br>");
     $("#notesModal").modal("show");
   });
-};
+}
 
 // "CLEAR ARTICLES" button: When clicked, delete all scraped articles.
 $(document).on("click", "#clear", function(event) {
@@ -43,17 +54,30 @@ $(document).on("click", "#clear", function(event) {
   // Run a DELETE request:
   $.ajax({
     method: "DELETE",
-    url: "/clearArticles"   
+    url: "/clearArticles"
   }).then(function(data) {
-      console.log(data);
-    });
-    location.reload();
+    console.log(data);
+  });
+  location.reload();
 });
 
+// "DELETE ARTICLE" button: When clicked, it deletes specified article from Saved Article page.
+$(document).on("click", "#delete-btn", function() {
+  var thisId = $(this).attr("data-id");
+
+  // Run a POST request to
+  $.ajax({
+    method: "DELETE",
+    url: "/articles/" + thisId,
+    data: {}
+  }).then(function(data) {
+    console.log(data);
+  });
+});
 
 // "ADD NOTES" button:
 $(document).on("click", "#add-notes-btn", function() {
-  refresh()
+  refresh();
 });
 
 // "SAVES NOTES" button: When clicked, grab user input and POST to MongoDB.
@@ -63,8 +87,8 @@ $(document).on("click", "#save-notes-btn", function(event) {
   var thisId = $(this).attr("data-id");
 
   console.log("thisId: ", thisId);
-  console.log("noteText:", $("#noteText").val());
-  
+  console.log("noteTextInput:", $("#noteTextInput").val());
+
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
@@ -72,29 +96,28 @@ $(document).on("click", "#save-notes-btn", function(event) {
     data: {
       articleID: thisId,
       // Value taken from notes written in the <textarea>
-      body: $("#noteText").val()
+      body: $("#noteTextInput").val()
     }
   }).then(function(data) {
-      // console.log("Data returned from AJAX: ", data);
-      //  $("#notes").empty();
-    });
-
+    /* Promise object returned by ajax has a method called, 'then',
+      whose function signature's input is an anonymous function with a JSON object.*/
     refresh();
+  });
 
   // Also, remove the values entered in the input and textarea for note entry
-  $("#noteText").val("");
+  $("#noteTextInput").val("");
 });
 
 // "DELETE NOTES" button:
 $(document).on("click", "#delete-notes-btn", function(event) {
   event.preventDefault();
 
-// Run a DELETE request
-$.ajax({
-  method: "DELETE",
-  url: "/deleteNotes"
-}).then(function(data) {
-  console.log(data);
+  // Run a DELETE all notes request
+  $.ajax({
+    method: "DELETE",
+    url: "/deleteNotes"
+  }).then(function(data) {
+    console.log(data);
   });
   refresh();
 });
