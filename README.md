@@ -12,16 +12,19 @@ The application follows a MVC design structure, and its UI is broken up into com
 [Scraping News | NYT Arts Edition](https://mari0203.github.io/Scraping-News/)
 
 
-## App Requirements
+## App Fuctionality
 
-1. Allow the user to scrape news articles and display each with below information:
+1. User can scrape the latest news articles from NYT and display each article with below information:
     * Article headline
     * Short summary of the article
-    * URL to the original article
+    * URL link to the original article
     
-2. 
+2. User an save (i.e. bookmark) article(s) into a "Saved Article" page.
 
-3. 
+3. User can add notes/comments for saved articles.
+
+4. User can clear all scraped articles at once or delete one article at a time from the list of Saved Articles.
+
 
 ---
 
