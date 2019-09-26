@@ -48,6 +48,8 @@
 
 #noteInput {
   float: right;
-  border: 1px solid red;
+  border: 1px dotted red;
   width: 45%;
+  min-height: 200px; 
+  padding: 5px 10px;
 }

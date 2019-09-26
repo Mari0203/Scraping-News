@@ -104,7 +104,6 @@ app.get("/saved", function(req, res) {
 app.delete("/clearArticles", function(req, res) {
   console.log("CLEARING ROUTES -- '/clearArticles' route worked!");
 
-  //  db.Article.remove({});
   db.Article.deleteMany({},  (err, data) => {
     if (err) {
       console.log(err);
@@ -165,18 +164,17 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // Routes for DELETING saved notes
-app.get("/deleteNotes", function(req, res) {
+app.delete("/deleteNotes", function(req, res) {
+
   // Remove every note from the notes collection
-  db.Note.remove({}, function(err, response) {
-    // Log any errors to the console
+  db.Note.deleteMany({}, function(err, responseDB) {
     if (err) {
       console.log(err);
       res.send(err);
     } else {
-      // Otherwise, send the mongojs response to the browser
-      // This will fire off the success function of the ajax request
-      console.log(response);
-      res.send(response);
+      // responseDB = data (in Line 96 of app.js)
+      console.log("responseDB: ", responseDB);
+      res.send(responseDB);
     }
   });
 });
